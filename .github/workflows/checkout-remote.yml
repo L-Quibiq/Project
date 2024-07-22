@@ -1,25 +1,12 @@
 name: Checkout Code from Another Repo
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:  # Add this line to allow manual triggering
 
 jobs:
-  checkout-code:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v2
-
-      - name: Checkout another repository
-        uses: actions/checkout@v2
-        with:
-          repository: L-Quibiq/Central  # Replace with the owner and repo of the target repository
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Use the secret for your personal access token
-          path: remote-repo  # Optional: specify the directory to checkout the repo into
+  call-workflow-passing-data:
+    uses: L-Quibiq/Central/.github/workflows/hello-world.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets:
+      envPAT: adjhakdfhsdufhsnvj
