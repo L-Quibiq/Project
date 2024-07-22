@@ -1,0 +1,15 @@
+name: Deploy Logic App
+
+on:
+  workflow_dispatch:  # Add this line to allow manual triggering
+
+jobs:
+  call-workflow-passing-data:
+    uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
+    with:
+      resource-group: edeka-tests
+      logic-app-name: la-edeka-test-logicapp
+      location: westeurope
+      storage-account-name: ljkadfjlhsldjfhljsdg
+      
+      
