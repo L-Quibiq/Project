@@ -11,5 +11,6 @@ jobs:
       logic-app-name: la-edeka-test-logicapp
       location: westeurope
       storage-account-name: ljkadfjlhsldjfhljsdg
+    secrets: inherit
       
       
