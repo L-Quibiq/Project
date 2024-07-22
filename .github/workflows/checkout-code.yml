@@ -1,0 +1,24 @@
+name: Checkout Code from Another Repo
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checkout-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Checkout another repository
+        uses: actions/checkout@v2
+        with:
+          repository: owner/repo  # Replace with the owner and repo of the target repository
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use the default GitHub token or a custom one
+          path: another-repo  # Optional: specify the directory to checkout the repo into
