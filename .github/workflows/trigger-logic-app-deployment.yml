@@ -20,3 +20,4 @@ jobs:
         uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
         with:
           appsettings-json: ${{ env.APPSETTINGS_JSON }}
+          secrets: inherit
