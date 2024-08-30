@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  call-workflow-passing-data:
+  prepare-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -16,8 +16,9 @@ jobs:
           appsettings=$(cat iac/parameters/appsettings.json)
           echo "APPSETTINGS_JSON=${appsettings}" >> $GITHUB_ENV
 
-      - name: Call reusable workflow
-        uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
-        with:
-          appsettings-json: ${{ env.APPSETTINGS_JSON }}
-          secrets: inherit
+  call-workflow-passing-data:
+    needs: prepare-and-deploy
+    uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
+    with:
+      appsettings-json: ${{ needs.prepare-and-deploy.outputs.APPSETTINGS_JSON }}
+    secrets: inherit
