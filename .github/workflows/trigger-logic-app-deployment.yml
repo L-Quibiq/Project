@@ -16,8 +16,7 @@ jobs:
         id: read_appsettings
         run: |
           appsettings=$(cat iac/parameters/appsettings.dev.json | base64)
-          echo "appsettings_json=${appsettings}" >> $GITHUB_ENV
-          echo "::set-output name=appsettings_json::${appsettings}"
+          echo "appsettings_json=${appsettings}" >> $GITHUB_OUTPUT
 
   call-workflow-passing-data:
     needs: prepare-and-deploy
