@@ -1,1 +1,22 @@
+name: Deploy Logic App with Params
 
+on:
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  call-workflow-passing-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read appsettings.json
+        id: read_appsettings
+        run: |
+          appsettings=$(cat iac/parameters/appsettings.json)
+          echo "APPSETTINGS_JSON=${appsettings}" >> $GITHUB_ENV
+
+      - name: Call reusable workflow
+        uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
+        with:
+          appsettings-json: ${{ env.APPSETTINGS_JSON }}
