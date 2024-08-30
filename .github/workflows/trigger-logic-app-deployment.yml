@@ -18,7 +18,7 @@ jobs:
 
   call-workflow-passing-data:
     needs: prepare-and-deploy
-    uses: L-Quibiq/Central/.github/workflows/logic-app-deployment.yml@main
+    uses: L-Quibiq/Central/.github/workflows/trigger-logic-app-deployment.yml@main
     with:
       appsettings-json: ${{ needs.prepare-and-deploy.outputs.APPSETTINGS_JSON }}
     secrets: inherit
