@@ -15,7 +15,7 @@ jobs:
       - name: Read and encode appsettings.json
         id: read_appsettings
         run: |
-          appsettings=$(cat iac/parameters/appsettings.dev.json | base64)
+          appsettings=$(cat iac/parameters/appsettings.dev.json | base64 -w 0)
           echo "appsettings_json=${appsettings}" >> $GITHUB_OUTPUT
 
   call-workflow-passing-data:
