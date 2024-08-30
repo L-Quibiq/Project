@@ -6,19 +6,22 @@ on:
 jobs:
   prepare-and-deploy:
     runs-on: ubuntu-latest
+    outputs:
+      appsettings-json: ${{ steps.read_appsettings.outputs.appsettings_json }
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Read appsettings.json
+      - name: Read and encode appsettings.json
         id: read_appsettings
         run: |
-          appsettings=$(cat iac/parameters/appsettings.dev.json)
-          echo "APPSETTINGS_JSON=${appsettings}" >> $GITHUB_ENV
+          appsettings=$(cat iac/parameters/appsettings.dev.json | base64)
+          echo "appsettings_json=${appsettings}" >> $GITHUB_ENV
+          echo "::set-output name=appsettings_json::${appsettings}"
 
   call-workflow-passing-data:
     needs: prepare-and-deploy
     uses: L-Quibiq/Central/.github/workflows/trigger-logic-app-deployment.yml@main
     with:
-      appsettings-json: ${{ needs.prepare-and-deploy.outputs.APPSETTINGS_JSON }}
+      appsettings-json: ${{ needs.prepare-and-deploy.outputs.appsettings-json }}
     secrets: inherit
