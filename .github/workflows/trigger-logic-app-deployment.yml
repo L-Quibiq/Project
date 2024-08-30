@@ -7,7 +7,7 @@ jobs:
   prepare-and-deploy:
     runs-on: ubuntu-latest
     outputs:
-      appsettings-json: ${{ steps.read_appsettings.outputs.appsettings_json }
+      appsettings-json: ${{ steps.read_appsettings.outputs.appsettings_json }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
