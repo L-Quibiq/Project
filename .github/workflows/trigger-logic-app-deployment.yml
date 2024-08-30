@@ -13,7 +13,7 @@ jobs:
       - name: Read appsettings.json
         id: read_appsettings
         run: |
-          appsettings=$(cat iac/parameters/appsettings.json)
+          appsettings=$(cat iac/parameters/appsettings.dev.json)
           echo "APPSETTINGS_JSON=${appsettings}" >> $GITHUB_ENV
 
   call-workflow-passing-data:
